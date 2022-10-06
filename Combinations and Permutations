@@ -1,6 +1,7 @@
 /** Add all combinations of a string to the array list "combinations"
  * With input "abc":
  * [abc], [ab], [ac], [bc], [a], [b], [c], [] (exclude the null set)
+ * Note: Not all of the code belongs to me
  */
 public static void combinations(String text)
 {
