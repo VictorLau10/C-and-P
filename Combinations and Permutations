@@ -1,0 +1,82 @@
+/** Add all combinations of a string to the array list "combinations"
+ * With input "abc":
+ * [abc], [ab], [ac], [bc], [a], [b], [c], [] (exclude the null set)
+ */
+public static void combinations(String text)
+{
+    // All combinations that have length greater than 2
+    for (int a = text.length(); a > 2; a--)
+    {
+        int length = a;
+        int n = text.length();
+        int N = (int) Math.pow(2, n); // 2 to the n = num of combinations
+        for (int i = 0; i < N; i++)
+        {
+            String binary = Integer.toBinaryString(N|i).substring(1); // You can either choose to include or not include a character (ex. 01011010) 
+            String string = "";
+            int counter = 0;
+            for (int j = 0; j < n; j++)
+            {
+                if (binary.charAt(j) == '1')
+                {
+                    string += text.charAt(j);
+                    counter++;
+                }
+            }
+            if (counter == length)
+            {
+                combinations.add(string);
+            }
+        }
+    }
+}
+
+public static void combinations(String text, int length)
+{
+    int n = text.length();
+    int N = (int) Math.pow(2, n); // 2 to the n = num of combinations
+    for (int i = 0; i < N; i++)
+    {
+        String binary = Integer.toBinaryString(N|i).substring(1); // converts the string to binary (ex. 0101) 
+        String string = "";
+        int counter = 0;
+        for (int j = 0; j < n; j++)
+        {
+            if (binary.charAt(j) == '1')
+            {
+                string += text.charAt(j);
+                counter++;
+            }
+        }
+        if (counter == length)
+        {
+            combinations.add(string);
+        }
+    }
+}
+
+/** Add all permutations of a string to the array list "permutations"
+ * With input "abc":
+ * [abc], [acb], [bac], [bca], [cab], [cba]
+ */
+public static void permute(String full)
+{
+    if (full == null || full.length() == 0)
+    {
+        sopl("Invalid input.");
+        return;
+    }
+    permute ("", full);
+}
+public static void permute(String prefix, String remaining)
+{
+    if (remaining.length() == 0)
+    {
+        permutations.add(prefix);
+        return;
+    }
+    for (int i = 0; i < remaining.length(); i++)
+    {
+        permute (prefix + remaining.charAt(i), remaining.substring(0, i) + remaining.substring(i + 1, remaining.length()));
+    }
+}
